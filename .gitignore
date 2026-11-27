@@ -1,0 +1,14 @@
+# Dependencias y build
+node_modules/
+dist/
+.netlify/
+
+# Variables de entorno locales (no subir enlaces privados al repo)
+.env
+.env.local
+.env.*.local
+
+# Logs y sistema
+npm-debug.log*
+.DS_Store
+Thumbs.db
