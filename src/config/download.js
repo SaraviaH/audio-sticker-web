@@ -1,24 +1,27 @@
 /**
- * CONFIGURACIÓN DEL ENLACE DE DESCARGA DEL APK
- * --------------------------------------------
- * Tienes dos opciones para configurar el enlace después:
- *
- * Opción 1 (Recomendada para Netlify):
- *   Define la variable de entorno `VITE_APK_DOWNLOAD_URL` en el panel de Netlify
- *   (así el enlace real no queda guardado en el repositorio Git).
- *   Recuerda volver a desplegar (redeploy) tras cambiar una variable de entorno.
- *
- * Opción 2 (Directa en este archivo):
- *   Reemplaza el valor vacío de `FALLBACK_APK_URL` por tu enlace HTTPS directo al .apk.
- *   Ejemplo: "https://tu-servidor-o-storage.com/AudioStickerStudio.apk"
+ * CONFIGURACIÓN DEL ENLACE DE DESCARGA Y CLAVE DE ACCESO
+ * ------------------------------------------------------
+ * - Define `VITE_APK_DOWNLOAD_URL` en Netlify para mantener el enlace fuera del repo Git.
+ * - `ACCESS_CODE` corresponde únicamente a la clave inicial de acceso a la app.
  */
 const FALLBACK_APK_URL = "";
+const DEFAULT_ACCESS_CODE = "shinju.n2597";
 
 export const APP_INFO = {
   name: "Audio Sticker Studio",
   platform: "Android",
-  fileName: "AudioStickerStudio.apk",
+  version: "v1.0.2",
+  creatorHandle: "shinju.n",
+  fileName: "AudioStickerStudio-V1.0.2.usuario.apk",
 };
+
+export function resolveAccessCode() {
+  const envCode =
+    typeof import.meta !== "undefined" && import.meta.env
+      ? import.meta.env.VITE_ACCESS_CODE
+      : "";
+  return String(envCode || DEFAULT_ACCESS_CODE).trim();
+}
 
 /**
  * Resuelve y valida el enlace HTTPS configurado únicamente en el momento de la descarga.
